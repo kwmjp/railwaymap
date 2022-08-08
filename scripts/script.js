@@ -22,7 +22,7 @@ function filterBy(year) {
     map.setFilter('stationhistory-layer', filters);
     document.getElementById('year').textContent = year;
 }
-
+//線幅の設定リスト
 const lineWidth = [
     'interpolate', ['linear'], ['zoom'],
     5, 1,
