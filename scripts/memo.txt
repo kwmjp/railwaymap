@@ -1,0 +1,23 @@
+    map.addLayer({
+        id: 'railhistory-label',
+        type: 'symbol',
+        source: 'railhistory',
+        layout: {
+            'text-field': ['get', 'N05_002'],
+            'text-size': 12
+        },
+        paint: {
+            'text-color': 'black'
+        }
+    });
+
+
+
+//運営会社ごとのパターン設定
+const patternSet = [
+    'match',
+    ['get', 'N05_003'],
+    ['日本国有鉄道', '東日本旅客鉄道（旧国鉄）'],
+    'rail1',
+    'rail2'
+];
