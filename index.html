@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <!-- Mapbox -->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
+    <!-- End of Mapbox -->
+    <title>Hello My Map!</title>
+</head>
+<body>
+   
+  <div class="wrapper">
+    <div id="slider-box">
+      <div class="map-overlay-inner">
+        <label id="year"></label>年の鉄道路線図<br />
+        <input id="slider" type="range" min="1950" max="2020" step="1" value="2020">
+      </div>
+    </div>
+    <div id="map"></div>
+  </div>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="scripts/script.js"></script>
+</body>
+</html>
