@@ -22,6 +22,21 @@ function filterBy(year) {
     map.setFilter('stationhistory-layer', filters);
     document.getElementById('year').textContent = year;
 }
+
+//地図内の路線情報を取得してリストに追加
+function showRailList() {
+    document.getElementById('info').innerText = '';
+    const railList = [];
+    const features = map.queryRenderedFeatures({layers: ['railhistory-jr-layer', 'railhistory-private-layer']});
+    for (const feature of features) {
+        const railInfo = feature.properties['N05_003'] + feature.properties['N05_002'];
+        if( railList.indexOf(railInfo) == -1 ) {
+            railList.push(railInfo);
+        };            
+    };
+    document.getElementById('info').insertAdjacentText('beforeend', railList);
+}
+
 //線幅の設定リスト
 const lineWidth = [
     'interpolate', ['linear'], ['zoom'],
@@ -32,8 +47,8 @@ const lineWidth = [
 const lineWidth2 = [
     'interpolate', ['linear'], ['zoom'],
     5, 1,
-    10, 1.6,
-    22, 5
+    10, 1.4,
+    22, 3
 ];
 
 
@@ -79,12 +94,14 @@ map.on('load', () => {
         type: 'circle',
         source: 'stationhistory',
         paint: {
-            'circle-color': 'black',
+            'circle-color': 'white',
+            'circle-stroke-color': 'black',
+            'circle-stroke-width': lineWidth2,
             'circle-radius': [
                 'interpolate', ['linear'], ['zoom'],
-                5, 1,
-                10, 2,
-                22, 15
+                5, 0.5,
+                10, 1.5,
+                22, 10
             ]
         }
     });
@@ -94,6 +111,7 @@ map.on('load', () => {
     document.getElementById('slider').addEventListener('input', (e) => {
         const year = parseInt(e.target.value, 10);
         filterBy(year);
+        showRailList();
     });
 
     //クリックしたときの処理
@@ -118,6 +136,11 @@ map.on('load', () => {
             .setLngLat(e.lngLat)
             .setHTML(e.features[0].properties['N05_011'])
             .addTo(map);
+    });
+
+    //地図が動いた時の処理
+    map.on('moveend', (e) => {
+        showRailList();
     });
 
 });

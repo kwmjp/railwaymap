@@ -21,3 +21,12 @@ const patternSet = [
     'rail1',
     'rail2'
 ];
+
+    //地物の情報を取得
+    map.on('moveend', (e) => {
+        document.getElementById('info').innerText = '';
+        const features = map.queryRenderedFeatures({layers: ['railhistory-jr-layer', 'railhistory-private-layer']});
+        for (const feature of features) {
+            document.getElementById('info').insertAdjacentText('beforeend', feature.properties['N05_002']);
+        };
+    });
