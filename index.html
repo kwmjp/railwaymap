@@ -16,17 +16,21 @@
     <div id="slider-box">
       <div class="map-overlay-inner">
         <label id="year"></label>年の鉄道路線図<br />
-        <input id="slider" type="range" min="1950" max="2020" step="1" value="2020">
+        <input id="slider" type="range" min="1950" max="2020" step="1" value="2020"><br>
+        <input class="year-button" type="button" value="1960">
+        <input class="year-button" type="button" value="1980">
+        <input class="year-button" type="button" value="2000">
+        <input class="year-button" type="button" value="2020">
       </div>
     </div>
     <div id="info-box">
-      地図の中にある鉄道路線<br />
+      地図の中にある鉄道路線<br>
       <div id="info"></div>
     </div>
     <div id="map"></div>
   </div>
 
 <script src="https://d3js.org/d3.v7.min.js"></script>
-<script src="scripts/script2.js"></script>
+<script src="scripts/script.js"></script>
 </body>
 </html>
