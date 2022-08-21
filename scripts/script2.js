@@ -35,7 +35,7 @@ function filterBy(year) {
     map.setFilter('railhistory-private', filters);
     map.setFilter('stationhistory', filters);
     document.getElementById('year').textContent = year;
-    showRailList();
+    setTimeout(showRailList(), 500);
 }
 
 
@@ -57,7 +57,6 @@ map.on('load', () => {
             document.getElementById('slider').value = e.target.value;
             const year = parseInt(e.target.value, 10);
             filterBy(year);
-            setTimeout(showRailList(), 2000)
         });
     });
 
