@@ -14,15 +14,6 @@ const map = new mapboxgl.Map({
     maxBounds: bounds
 });
 
-//フィルター作成
-function filterBy(year) {
-    const filters = ['all', ['<=', 'N05_005b', year], ['>=', 'N05_005e', year]];
-    map.setFilter('railhistory-jr', filters);
-    map.setFilter('railhistory-private', filters);
-    map.setFilter('stationhistory', filters);
-    document.getElementById('year').textContent = year;
-}
-
 //地図内の路線情報を取得してリストに追加
 function showRailList() {
     document.getElementById('info').innerText = '';
@@ -37,6 +28,17 @@ function showRailList() {
     document.getElementById('info').insertAdjacentText('beforeend', railList);
 }
 
+//フィルター作成
+function filterBy(year) {
+    const filters = ['all', ['<=', 'N05_005b', year], ['>=', 'N05_005e', year]];
+    map.setFilter('railhistory-jr', filters);
+    map.setFilter('railhistory-private', filters);
+    map.setFilter('stationhistory', filters);
+    document.getElementById('year').textContent = year;
+    showRailList();
+}
+
+
 
 //地図の描画
 map.on('load', () => {
@@ -48,7 +50,14 @@ map.on('load', () => {
     document.getElementById('slider').addEventListener('input', (e) => {
         const year = parseInt(e.target.value, 10);
         filterBy(year);
-        showRailList();
+    });
+    //年号ボタンとの連動
+    document.querySelectorAll('.year-button').forEach(function(button) {
+        button.addEventListener('click', (e) => {
+            document.getElementById('slider').value = e.target.value;
+            const year = parseInt(e.target.value, 10);
+            filterBy(year);
+        });
     });
 
     //クリックしたときの処理
