@@ -35,7 +35,7 @@ function filterBy(year) {
     map.setFilter('railhistory-private', filters);
     map.setFilter('stationhistory', filters);
     document.getElementById('year').textContent = year;
-    setTimeout(showRailList(), 500);
+    setTimeout(showRailList, 500);
 }
 
 
